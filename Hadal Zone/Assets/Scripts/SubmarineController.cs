@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SubmarineController : MonoBehaviour
 {
-    public float moveSpeed = 3f;
+    public float moveSpeed = 1.5f;
     private Rigidbody2D rb;
     private float moveInput;
 
