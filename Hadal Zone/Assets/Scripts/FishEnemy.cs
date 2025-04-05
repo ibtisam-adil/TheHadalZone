@@ -63,7 +63,6 @@ public class FishEnemy : MonoBehaviour
         hasBeenHit = true;
         Debug.Log($"Took {damage} damage. Health: {currentHealth}");
 
-        // Visual feedback (flash red)
         if (spriteRenderer != null)
         {
             spriteRenderer.color = Color.red;
@@ -76,13 +75,13 @@ public class FishEnemy : MonoBehaviour
         }
         else
         {
-            Invoke(nameof(ResetHitFlag), 0.1f); // Reset hit flag after a short delay
+            Invoke(nameof(ResetHitFlag), 0.1f);
         }
     }
 
     private void Die()
     {
-        if (!isAlive) return; // Prevent multiple death calls
+        if (!isAlive) return;
         isAlive = false;
 
         Debug.Log($"Enemy: Dying at {transform.position}");
