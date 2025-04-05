@@ -4,7 +4,6 @@ public class FishEnemy : MonoBehaviour
 {
     [Header("Enemy Stats")]
     public int baseHealth = 20; 
-    public float speed = 2.0f;
     public int damage = 1;
 
     [Header("Separation Behavior")]
@@ -18,9 +17,9 @@ public class FishEnemy : MonoBehaviour
     private Rigidbody2D rb;
 
     [Header("State")]
-    private int maxHealth; // Maximum health for this enemy
-    private int currentHealth; // Current health
-    private bool hasBeenHit = false; // Prevents multiple hits in quick succession
+    private int maxHealth; 
+    private int currentHealth;
+    private bool hasBeenHit = false;
     private bool isAlive = true;
 
     private void Awake()
@@ -37,7 +36,7 @@ public class FishEnemy : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = baseHealth; // Initialize with baseHealth (you had maxHealth before which wasn't set)
+        currentHealth = baseHealth;
 
         FindSubmarineReference();
 
@@ -64,7 +63,6 @@ public class FishEnemy : MonoBehaviour
         hasBeenHit = true;
         Debug.Log($"Took {damage} damage. Health: {currentHealth}");
 
-        // Visual feedback (flash red)
         if (spriteRenderer != null)
         {
             spriteRenderer.color = Color.red;
@@ -77,19 +75,19 @@ public class FishEnemy : MonoBehaviour
         }
         else
         {
-            Invoke(nameof(ResetHitFlag), 0.1f); // Reset hit flag after a short delay
+            Invoke(nameof(ResetHitFlag), 0.1f);
         }
     }
 
     private void Die()
     {
-        if (!isAlive) return; // Prevent multiple death calls
+        if (!isAlive) return;
         isAlive = false;
 
         Debug.Log($"Enemy: Dying at {transform.position}");
 
         // Disable colliders and destroy the enemy
-        DisableColliders();
+        //DisableColliders();
         enabled = false; // Disable this script
         Destroy(gameObject, 0.1f); // Destroy after a short delay
     }
@@ -110,50 +108,10 @@ public class FishEnemy : MonoBehaviour
             FindSubmarineReference();
             return;
         }
-
-        Vector2 moveDirection = (submarine.position - transform.position).normalized;
-        rb.linearVelocity = moveDirection * speed;
     }
 
 
-    private void AvoidOtherEnemies()
-    {
-        Vector2 separationVector = GetSeparationVector();
-        if (separationVector != Vector2.zero)
-        {
-            rb.AddForce(separationVector * separationForce * Time.deltaTime, ForceMode2D.Impulse);
-        }
-    }
 
-    private Vector2 GetSeparationVector()
-    {
-        Vector2 separationVector = Vector2.zero;
-        int nearbyEnemies = 0;
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, separationDistance);
-
-        foreach (Collider2D collider in colliders)
-        {
-            if (collider.gameObject != gameObject && collider.CompareTag("Enemy"))
-            {
-                Vector2 awayDirection = (transform.position - collider.transform.position).normalized;
-
-                float distance = Vector2.Distance(transform.position, collider.transform.position);
-                float forceScale = 1 - (distance / separationDistance);
-
-                separationVector += awayDirection * forceScale;
-                nearbyEnemies++;
-            }
-        }
-
-        if (nearbyEnemies > 0)
-        {
-            separationVector /= nearbyEnemies;
-            separationVector *= separationForce;
-        }
-
-        return separationVector;
-    }
 
     private void FindSubmarineReference()
     {
@@ -200,19 +158,9 @@ public class FishEnemy : MonoBehaviour
         }
     }
 
-    public void SetSpeed(float newSpeed)
-    {
-        speed = newSpeed; 
-    }
 
     public int GetMaxHealth()
     {
         return maxHealth; 
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, separationDistance);
     }
 }

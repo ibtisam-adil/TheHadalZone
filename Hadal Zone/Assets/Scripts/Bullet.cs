@@ -51,17 +51,17 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log("Bullet hit an enemy!");
 
-            //Enemy enemy = other.GetComponent<Enemy>();
-            //if (enemy != null)
-            //{
-            //    enemy.TakeDamage(damage);
-              
+            FishEnemy fishEnemy = other.GetComponent<FishEnemy>();
+            if (fishEnemy != null)
+            {
+                fishEnemy.TakeDamage(damage);
+
 
                 HandleHit();
-            //}
-           
+        }
 
-            Destroy(gameObject); // Destroy bullet on impact
+
+        Destroy(gameObject); // Destroy bullet on impact
         }
     }
 

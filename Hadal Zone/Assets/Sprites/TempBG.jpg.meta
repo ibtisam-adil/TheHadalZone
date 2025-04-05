@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0b85b55db82b2384493f0c6ffdf25edf
+guid: 26a2e0e089482e84ab1ff2d9563b7b35
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3451699440861859892
-    second: MainMenu_0
+      213: 7588097179868784991
+    second: gradient-blue-abstract-background-smooth-dark-blue-with-black-vignette-studio_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MainMenu_0
+      name: gradient-blue-abstract-background-smooth-dark-blue-with-black-vignette-studio_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 160
-        height: 240
+        width: 5000
+        height: 6000
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ccfa30c75a91910d0800000000000000
-      internalID: -3451699440861859892
+      spriteID: f59e83f7e265e4960800000000000000
+      internalID: 7588097179868784991
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MainMenu_0: -3451699440861859892
+      gradient-blue-abstract-background-smooth-dark-blue-with-black-vignette-studio_0: 7588097179868784991
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

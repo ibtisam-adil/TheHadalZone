@@ -832,9 +832,9 @@ public class AstarPath : VersionedMonoBehaviour {
 			if (logPathResults == PathLog.InGame) {
 				inGameDebugPath = debug;
 			} else if (path.error) {
-				Debug.LogWarning(debug);
+				//Debug.LogWarning(debug);
 			} else {
-				Debug.Log(debug);
+				//Debug.Log(debug);
 			}
 		}
 	}
@@ -1781,7 +1781,7 @@ public class AstarPath : VersionedMonoBehaviour {
 		System.GC.Collect();
 
 		if (logPathResults != PathLog.None && logPathResults != PathLog.OnlyErrors) {
-			Debug.Log("Scanning - Process took "+(lastScanTime*1000).ToString("0")+" ms to complete");
+			//Debug.Log("Scanning - Process took "+(lastScanTime*1000).ToString("0")+" ms to complete");
 		}
 	}
 
@@ -1949,9 +1949,9 @@ public class AstarPath : VersionedMonoBehaviour {
 		}
 
 		if (astar.graphs == null || astar.graphs.Length == 0) {
-			Debug.LogError("There are no graphs in the scene");
-			path.FailWithError("There are no graphs in the scene");
-			Debug.LogError(path.errorLog);
+			//Debug.LogError("There are no graphs in the scene");
+			//path.FailWithError("There are no graphs in the scene");
+			//Debug.LogError(path.errorLog);
 			return;
 		}
 
