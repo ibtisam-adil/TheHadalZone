@@ -22,7 +22,7 @@ public class Pistol : Gun
         bulletScript.SetDirection(firePoint.right);
 
         // Recoil
-        Rigidbody2D playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        Rigidbody2D playerRb = GameObject.FindGameObjectWithTag("Submarine").GetComponent<Rigidbody2D>();
         if (playerRb != null)
         {
             Vector2 recoilForce = -(AimWeapon.aimDirection * weaponRecoil);

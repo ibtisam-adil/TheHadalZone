@@ -2969,13 +2969,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c54a44328960c6e45bc7c9e1f3c50cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  fireRate: 0
-  bulletPrefab: {fileID: 3996704763547617221, guid: 3a9bbfef4187a154083cc8fdaf028e80, type: 3}
+  damage: 10
+  fireRate: 5
+  bulletPrefab: {fileID: 6957824047321733776, guid: 5d0c7c79bf4430e45b5b679a1723665e, type: 3}
   firePoint: {fileID: 961536898}
-  AimWeapon: {fileID: 0}
-  bulletSpeed: 0
-  bulletLifetime: 0
+  AimWeapon: {fileID: 197206912}
+  bulletSpeed: 5
+  bulletLifetime: 1
   weaponRecoil: 0
 --- !u!4 &1540377178 stripped
 Transform:
@@ -3920,6 +3920,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1436266721}
     m_Modifications:
+    - target: {fileID: 1581483526254308942, guid: e7c8055a8355e79449f5c6d5c499f4a3, type: 3}
+      propertyPath: submarine
+      value: 
+      objectReference: {fileID: 197206908}
     - target: {fileID: 2425404144187098011, guid: e7c8055a8355e79449f5c6d5c499f4a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.24347305
