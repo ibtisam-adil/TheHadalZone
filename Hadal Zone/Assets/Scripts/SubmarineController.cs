@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class SubmarineController : MonoBehaviour
@@ -9,9 +10,13 @@ public class SubmarineController : MonoBehaviour
     private Rigidbody2D rb;
     private float moveInput;
 
+    private float surfaceY; 
+    public TextMeshProUGUI depthText;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        surfaceY = transform.position.y;
     }
 
     void Update()
@@ -26,6 +31,9 @@ public class SubmarineController : MonoBehaviour
         {
             moveInput = 1f;
         }
+
+        float depth = Mathf.Abs(transform.position.y - surfaceY);
+        depthText.text = "Depth: " + depth.ToString("F1") + "m";
     }
 
     void FixedUpdate()

@@ -4,7 +4,7 @@ public class FishEnemy : MonoBehaviour
 {
     [Header("Enemy Stats")]
     public int baseHealth = 20; 
-    public int damage = 1;
+    public int damage = 5;
 
     [Header("Separation Behavior")]
     public float separationDistance = 2.5f;
@@ -40,7 +40,6 @@ public class FishEnemy : MonoBehaviour
 
         FindSubmarineReference();
 
-        // Ignore collisions between enemies using the modern method
         Collider2D[] allEnemies = FindObjectsByType<Collider2D>(FindObjectsSortMode.None);
         Collider2D thisCollider = GetComponent<Collider2D>();
 
@@ -87,7 +86,7 @@ public class FishEnemy : MonoBehaviour
         Debug.Log($"Enemy: Dying at {transform.position}");
 
         // Disable colliders and destroy the enemy
-        //DisableColliders();
+        DisableColliders();
         enabled = false; // Disable this script
         Destroy(gameObject, 0.1f); // Destroy after a short delay
     }
@@ -130,15 +129,14 @@ public class FishEnemy : MonoBehaviour
     {
         Debug.Log($"Enemy collided with {collision.gameObject.name}");
 
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Submarine"))
         {
-            Debug.Log($"Enemy dealt {damage} damage to player.");
-            //PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
-            //if (playerHealth != null)
-            //{
-            //    playerHealth.TakeDamage(damage);
-            //    Debug.Log($"Enemy dealt {damage} damage to player.");
-            //}
+            SubmarineHealth submarineHealth = collision.GetComponent<SubmarineHealth>();
+            if (submarineHealth != null)
+            {
+                submarineHealth.TakeDamage(damage);
+                Debug.Log($"Enemy dealt {damage} damage to player.");
+            }
         }
     }
 
