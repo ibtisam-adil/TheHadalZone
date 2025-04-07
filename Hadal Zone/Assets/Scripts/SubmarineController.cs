@@ -12,6 +12,7 @@ public class SubmarineController : MonoBehaviour
 
     private float surfaceY; 
     public TextMeshProUGUI depthText;
+    public GameObject sonarPing;
 
     void Start()
     {
@@ -34,6 +35,12 @@ public class SubmarineController : MonoBehaviour
 
         float depth = Mathf.Abs(transform.position.y - surfaceY);
         depthText.text = "Depth: " + depth.ToString("F1") + "m";
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(sonarPing, transform.position, Quaternion.identity);
+        }
+
     }
 
     void FixedUpdate()
