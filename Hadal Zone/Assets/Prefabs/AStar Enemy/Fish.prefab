@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 6999651449756990912}
   - component: {fileID: 8229882181639921456}
   - component: {fileID: 1581483526254308942}
-  - component: {fileID: -6496937558429718255}
+  - component: {fileID: 3548992324895135328}
   - component: {fileID: 8908576467736757592}
+  - component: {fileID: -6496937558429718255}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Enemy
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.55345905, g: 0.336611, b: 0.15489888, a: 0.019607844}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -137,7 +138,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 0.9
+  maxSpeed: 0.8
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -194,33 +195,20 @@ MonoBehaviour:
   separationDistance: 2.5
   separationForce: 10
   submarine: {fileID: 0}
---- !u!50 &-6496937558429718255
-Rigidbody2D:
-  serializedVersion: 5
+--- !u!114 &3548992324895135328
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4317729553448247740}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd1fa7bdb4a88a443aed0b6cd5a2445b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowColor: {r: 0.9877068, g: 1, b: 0, a: 1}
+  glowDuration: 0.7
 --- !u!58 &8908576467736757592
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -257,3 +245,30 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.01909852, y: 0.008403473}
   m_Radius: 0.4403178
+--- !u!50 &-6496937558429718255
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4317729553448247740}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

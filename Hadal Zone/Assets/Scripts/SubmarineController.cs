@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class SubmarineController : MonoBehaviour
@@ -9,23 +10,37 @@ public class SubmarineController : MonoBehaviour
     private Rigidbody2D rb;
     private float moveInput;
 
+    private float surfaceY; 
+    public TextMeshProUGUI depthText;
+    public GameObject sonarPing;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        surfaceY = transform.position.y;
     }
 
     void Update()
     {
         moveInput = 0f;
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             moveInput = -1f;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             moveInput = 1f;
         }
+
+        float depth = Mathf.Abs(transform.position.y - surfaceY);
+        depthText.text = "Depth: " + depth.ToString("F1") + "m";
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(sonarPing, transform.position, Quaternion.identity);
+        }
+
     }
 
     void FixedUpdate()
