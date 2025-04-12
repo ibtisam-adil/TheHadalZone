@@ -770,9 +770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1521513a48fdd045a95d2232fa41168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.1
-  sinkSpeed: -0.55
-  upwardThrust: 0.25
+  moveSpeed: 1
+  sinkSpeed: -0.099
   depthText: {fileID: 1789844546}
   sonarPing: {fileID: 1968184221017527868, guid: 0706623e4fd39124a9f20404b528f026, type: 3}
 --- !u!114 &197206912
@@ -4041,8 +4040,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
