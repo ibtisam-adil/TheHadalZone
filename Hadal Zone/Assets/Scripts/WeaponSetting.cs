@@ -6,7 +6,6 @@ public abstract class WeaponSetting : MonoBehaviour
     public float fireRate;
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public AimWeapon AimWeapon;
     public float bulletSpeed;
     public float bulletLifetime;
     public float weaponRecoil;

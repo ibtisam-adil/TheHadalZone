@@ -5,83 +5,81 @@ public class Bullet : MonoBehaviour
     public float speed = 10f;
     public int damage = 10;
     public float lifetime = 3f;
-    private Vector2 direction;
-    private GameObject shooter;
+    public float turnSpeed = 200f;
+    public float rotationSpeed = 5f;  // Speed of rotation towards the target
+    public float bulletSpeed = 10f;
 
+    public GameObject target;
     private Rigidbody2D rb;
     private bool hasHit;
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = direction * speed;
-        Destroy(gameObject, lifetime);
-    }
-
-    public void SetDamage(int newDamage)
-    {
-        damage = newDamage;
-    }
 
     public void Initialize(float bulletSpeed, float bulletLifetime, int bulletDamage)
     {
         speed = bulletSpeed;
         lifetime = bulletLifetime;
         damage = bulletDamage;
+        Destroy(gameObject, lifetime);
     }
 
-    public void SetDirection(Vector2 aimDirection)
+    public void SetDirection(Vector2 initialDirection)
     {
-        direction = aimDirection.normalized;
-        if (rb != null) rb.linearVelocity = direction * speed;
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = initialDirection.normalized * speed;
     }
 
-    private void Update()
+    public void SetTarget(GameObject newTarget)
     {
-        transform.position += (Vector3)direction * speed * Time.deltaTime;
+        target = newTarget;
+    }
+
+    void FixedUpdate()
+    {
+        if (target != null)
+        {
+            Vector2 directionToTarget = target.transform.position - transform.position;
+            directionToTarget.Normalize();
+
+            // Get the angle to rotate towards the target
+            float angleToTarget = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
+
+            // Smoothly rotate the missile to the target using LerpAngle
+            float angle = Mathf.LerpAngle(transform.eulerAngles.z, angleToTarget, rotationSpeed * Time.deltaTime);
+
+            // Apply the rotation to the missile
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+            // Move the missile towards the target
+            rb.linearVelocity = transform.right * bulletSpeed;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (hasHit) return;
         if (other.CompareTag("Bullets")) return;
-        Debug.Log("Bullet hit: " + other.gameObject.name);
 
-        if (other.CompareTag("Enemy") && other.gameObject != shooter)
+        if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Bullet hit an enemy!");
-
             FishEnemy fishEnemy = other.GetComponent<FishEnemy>();
             if (fishEnemy != null)
             {
                 fishEnemy.TakeDamage(damage);
-
-
                 HandleHit();
-        }
+            }
 
-
-        Destroy(gameObject); // Destroy bullet on impact
+            Destroy(gameObject);
         }
     }
-
 
     private void HandleHit()
     {
         hasHit = true;
-
         Collider2D col = GetComponent<Collider2D>();
         if (col != null) col.enabled = false;
 
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null) spriteRenderer.enabled = false;
 
-        Destroy(gameObject, 0.1f); 
+        Destroy(gameObject, 0.1f);
     }
-
-
 }
-
-
-
-

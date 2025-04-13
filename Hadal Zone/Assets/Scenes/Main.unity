@@ -786,6 +786,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db021072c9294f24dac2c6eeccedf209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeaponHolder: {fileID: 0}
+  <aimDirection>k__BackingField: {x: 0, y: 0, z: 0}
+  mainCamera: {fileID: 0}
 --- !u!114 &197206913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3464,8 +3467,7 @@ MonoBehaviour:
   fireRate: 1
   bulletPrefab: {fileID: 6957824047321733776, guid: 5d0c7c79bf4430e45b5b679a1723665e, type: 3}
   firePoint: {fileID: 961536898}
-  AimWeapon: {fileID: 197206912}
-  bulletSpeed: 2
+  bulletSpeed: 1.2
   bulletLifetime: 1
   weaponRecoil: 0
 --- !u!4 &1540377178 stripped
