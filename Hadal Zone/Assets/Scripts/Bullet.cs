@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
     public int damage = 10;
     public float lifetime = 3f;
     public float turnSpeed = 200f;
-    public float rotationSpeed = 5f;  // Speed of rotation towards the target
+    public float rotationSpeed = 5f;
     public float bulletSpeed = 10f;
 
     public GameObject target;
