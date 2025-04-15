@@ -290,7 +290,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.1507, y: -0.6724, z: -0.004738073}
-  m_LocalScale: {x: 0.4, y: 0.15, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9005669967127530944}
@@ -310,12 +310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b40a6c4958de74cb77c3be99c15fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.2
-  damage: 10
-  lifetime: 3
-  turnSpeed: 200
-  rotationSpeed: 5
-  bulletSpeed: 1.2
   target: {fileID: 4317729553448247740, guid: e7c8055a8355e79449f5c6d5c499f4a3, type: 3}
 --- !u!50 &1265503709945239271
 Rigidbody2D:

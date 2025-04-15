@@ -2,39 +2,57 @@ using UnityEngine;
 
 public class MissileLauncher : WeaponSetting
 {
+    public MissileAmmoUI ammoUI;
+
+    public int maxAmmo = 8;
+    private int currentAmmo;
+    private float cooldownTime = 0f;
+    private float fireCooldownDuration;
+
+    void Start()
+    {
+        fireCooldownDuration = 1f / fireRate;
+        currentAmmo = maxAmmo;
+    }
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime)
+        if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime && currentAmmo > 0)
         {
-
             Shoot();
-            nextFireTime = Time.time + 1f / fireRate;
+            nextFireTime = Time.time + fireCooldownDuration;
+            cooldownTime = fireCooldownDuration; // start cooldown
+            currentAmmo--;
+            ammoUI.UpdateAmmo(currentAmmo, maxAmmo);
+        }
+
+        // Handle cooldown UI effect
+        if (cooldownTime > 0)
+        {
+            cooldownTime -= Time.deltaTime;
+            float fill = cooldownTime / fireCooldownDuration;
+            ammoUI.SetCooldown(fill);
+        }
+        else
+        {
+            ammoUI.SetCooldown(0f);
         }
     }
 
 
     public override void Shoot()
     {
-        // First, find the closest enemy
         GameObject target = FindClosestEnemy();
-
-        // Then, instantiate the bullet
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
 
         if (target != null)
         {
-            // Assign the target to the bullet
             Bullet bulletScript = bullet.GetComponent<Bullet>();
-            bulletScript.target = target;
-
-            // Set the bullet's direction
-            bullet.transform.right = (target.transform.position - bullet.transform.position).normalized;
-
-            bulletScript.Initialize(bulletSpeed, bulletLifetime, damage);
-            bulletScript.SetDirection(firePoint.right);
+            Vector2 direction = (target.transform.position - bullet.transform.position).normalized;
+            bullet.transform.right = direction;
+            bulletScript.InitializeFromWeapon(this, target, firePoint.right);
         }
 
-        // Recoil code
         Rigidbody2D playerRb = GameObject.FindGameObjectWithTag("Submarine").GetComponent<Rigidbody2D>();
         if (playerRb != null)
         {
@@ -62,5 +80,4 @@ public class MissileLauncher : WeaponSetting
 
         return closest;
     }
-
 }

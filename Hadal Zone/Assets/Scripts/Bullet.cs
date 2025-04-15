@@ -2,61 +2,49 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10f;
-    public int damage = 10;
-    public float lifetime = 3f;
-    public float turnSpeed = 200f;
-    public float rotationSpeed = 5f;
-    public float bulletSpeed = 10f;
+    private float speed;
+    private int damage;
+    private float lifetime;
+    private float turnSpeed;
+    private float rotationSpeed;
 
     public GameObject target;
     private Rigidbody2D rb;
     private bool hasHit;
 
-    public void Initialize(float bulletSpeed, float bulletLifetime, int bulletDamage)
+    public void InitializeFromWeapon(WeaponSetting weapon, GameObject newTarget, Vector2 initialDirection)
     {
-        speed = bulletSpeed;
-        lifetime = bulletLifetime;
-        damage = bulletDamage;
-        Destroy(gameObject, lifetime);
-    }
+        speed = weapon.bulletSpeed;
+        damage = weapon.damage;
+        lifetime = weapon.bulletLifetime;
+        turnSpeed = 200f;
+        rotationSpeed = 5f;
 
-    public void SetDirection(Vector2 initialDirection)
-    {
-        if (rb == null) rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = initialDirection.normalized * speed;
-    }
-
-    public void SetTarget(GameObject newTarget)
-    {
         target = newTarget;
+
+        rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = initialDirection.normalized * speed;
+
+        Destroy(gameObject, lifetime);
     }
 
     void FixedUpdate()
     {
-        if (target != null)
+        if (target != null && rb != null)
         {
             Vector2 directionToTarget = target.transform.position - transform.position;
             directionToTarget.Normalize();
 
-            // Get the angle to rotate towards the target
             float angleToTarget = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
-
-            // Smoothly rotate the missile to the target using LerpAngle
             float angle = Mathf.LerpAngle(transform.eulerAngles.z, angleToTarget, rotationSpeed * Time.deltaTime);
-
-            // Apply the rotation to the missile
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-            // Move the missile towards the target
-            rb.linearVelocity = transform.right * bulletSpeed;
+            rb.linearVelocity = transform.right * speed;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (hasHit) return;
-        if (other.CompareTag("Bullets")) return;
+        if (hasHit || other.CompareTag("Bullets")) return;
 
         if (other.CompareTag("Enemy"))
         {
