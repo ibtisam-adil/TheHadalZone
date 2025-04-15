@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     private bool hasHit;
 
-    private float homingDelay = 1.5f; // Delay before it starts turning
+    private float homingDelay = 0.6f; 
     private float homingTimer;
 
     public void InitializeFromWeapon(WeaponSetting weapon, GameObject newTarget, Vector2 initialDirection)

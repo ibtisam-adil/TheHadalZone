@@ -717,7 +717,6 @@ GameObject:
   - component: {fileID: 197206909}
   - component: {fileID: 197206910}
   - component: {fileID: 197206911}
-  - component: {fileID: 197206912}
   - component: {fileID: 197206913}
   m_Layer: 8
   m_Name: Submarine
@@ -826,21 +825,6 @@ MonoBehaviour:
   sinkSpeed: -0.099
   depthText: {fileID: 1789844546}
   sonarPing: {fileID: 1968184221017527868, guid: 0706623e4fd39124a9f20404b528f026, type: 3}
---- !u!114 &197206912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197206907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db021072c9294f24dac2c6eeccedf209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponHolder: {fileID: 0}
-  <aimDirection>k__BackingField: {x: 0, y: 0, z: 0}
-  mainCamera: {fileID: 0}
 --- !u!114 &197206913
 MonoBehaviour:
   m_ObjectHideFlags: 0

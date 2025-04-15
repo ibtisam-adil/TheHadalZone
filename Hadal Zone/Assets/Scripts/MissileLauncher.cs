@@ -42,14 +42,12 @@ public class MissileLauncher : WeaponSetting
     public override void Shoot()
     {
         GameObject target = FindClosestEnemy();
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); // Keep its current facing
 
         if (target != null)
         {
             Bullet bulletScript = bullet.GetComponent<Bullet>();
-            Vector2 direction = (target.transform.position - bullet.transform.position).normalized;
-            bullet.transform.right = direction;
-            bulletScript.InitializeFromWeapon(this, target, firePoint.right);
+            bulletScript.InitializeFromWeapon(this, target, firePoint.right); // Use straight direction
         }
 
         Rigidbody2D playerRb = GameObject.FindGameObjectWithTag("Submarine").GetComponent<Rigidbody2D>();
