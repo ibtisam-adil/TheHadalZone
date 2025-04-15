@@ -28,10 +28,7 @@ public class FishEnemy : MonoBehaviour
         colliders = GetComponentsInChildren<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
 
-        if (rb == null)
-        {
-            Debug.LogError("Rigidbody2D is missing on the enemy!");
-        }
+ 
     }
 
     private void Start()
@@ -60,7 +57,6 @@ public class FishEnemy : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Max(0, currentHealth);
         hasBeenHit = true;
-        Debug.Log($"Took {damage} damage. Health: {currentHealth}");
 
         if (spriteRenderer != null)
         {
@@ -83,12 +79,9 @@ public class FishEnemy : MonoBehaviour
         if (!isAlive) return;
         isAlive = false;
 
-        Debug.Log($"Enemy: Dying at {transform.position}");
-
-        // Disable colliders and destroy the enemy
         DisableColliders();
-        enabled = false; // Disable this script
-        Destroy(gameObject, 0.1f); // Destroy after a short delay
+        enabled = false; 
+        Destroy(gameObject, 0.1f);
     }
 
     private void DisableColliders()
@@ -97,7 +90,6 @@ public class FishEnemy : MonoBehaviour
         {
             collider.enabled = false;
         }
-        Debug.Log("Enemy: Colliders disabled");
     }
 
     private void Update()
@@ -119,7 +111,6 @@ public class FishEnemy : MonoBehaviour
             submarine = GameObject.FindGameObjectWithTag("Submarine")?.transform;
             if (submarine == null)
             {
-                Debug.LogWarning("submarine not found. Retrying in 1 second.");
                 Invoke(nameof(FindSubmarineReference), 1f);
             }
         }
@@ -135,7 +126,6 @@ public class FishEnemy : MonoBehaviour
             if (submarineHealth != null)
             {
                 submarineHealth.TakeDamage(damage);
-                Debug.Log($"Enemy dealt {damage} damage to player.");
             }
         }
     }

@@ -12,6 +12,9 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     private bool hasHit;
 
+    private float homingDelay = 1.5f; // Delay before it starts turning
+    private float homingTimer;
+
     public void InitializeFromWeapon(WeaponSetting weapon, GameObject newTarget, Vector2 initialDirection)
     {
         speed = weapon.bulletSpeed;
@@ -21,6 +24,7 @@ public class Bullet : MonoBehaviour
         rotationSpeed = 5f;
 
         target = newTarget;
+        homingTimer = homingDelay;
 
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = initialDirection.normalized * speed;
@@ -30,7 +34,15 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (target != null && rb != null)
+        if (hasHit || rb == null) return;
+
+        if (homingTimer > 0f)
+        {
+            homingTimer -= Time.fixedDeltaTime;
+            // Keep moving straight
+            rb.linearVelocity = transform.right * speed;
+        }
+        else if (target != null)
         {
             Vector2 directionToTarget = target.transform.position - transform.position;
             directionToTarget.Normalize();
@@ -38,6 +50,7 @@ public class Bullet : MonoBehaviour
             float angleToTarget = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
             float angle = Mathf.LerpAngle(transform.eulerAngles.z, angleToTarget, rotationSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
             rb.linearVelocity = transform.right * speed;
         }
     }

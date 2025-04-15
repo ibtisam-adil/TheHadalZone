@@ -21,12 +21,11 @@ public class MissileLauncher : WeaponSetting
         {
             Shoot();
             nextFireTime = Time.time + fireCooldownDuration;
-            cooldownTime = fireCooldownDuration; // start cooldown
+            cooldownTime = fireCooldownDuration;
             currentAmmo--;
             ammoUI.UpdateAmmo(currentAmmo, maxAmmo);
         }
 
-        // Handle cooldown UI effect
         if (cooldownTime > 0)
         {
             cooldownTime -= Time.deltaTime;
