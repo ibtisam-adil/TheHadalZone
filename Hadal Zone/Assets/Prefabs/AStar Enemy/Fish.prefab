@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af51e1d00b9f714b986947713b00432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 20
+  baseHealth: 2
   damage: 1
   separationDistance: 2.5
   separationForce: 10
