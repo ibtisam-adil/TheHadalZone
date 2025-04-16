@@ -39,7 +39,6 @@ public class Bullet : MonoBehaviour
         if (homingTimer > 0f)
         {
             homingTimer -= Time.fixedDeltaTime;
-            // Keep moving straight
             rb.linearVelocity = transform.right * speed;
         }
         else if (target != null)
