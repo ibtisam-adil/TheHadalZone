@@ -40,11 +40,12 @@ public class SampleSpawningBehaviour : MonoBehaviour
             s.AddComponent<Sample>();
             s.AddComponent<SpriteRenderer>();
 
-            SpriteRenderer sprite= s.GetComponent<SpriteRenderer>();
-            sprite.sprite = SampleSprite;
-
             s.AddComponent<Rigidbody2D>();
             s.AddComponent<BoxCollider2D>();
+
+            s.AddComponent<SpriteRenderer>();
+            s.GetComponent<SpriteRenderer>().sprite = SampleSprite;
+
 
             Rigidbody2D body = s.GetComponent<Rigidbody2D>();
 
