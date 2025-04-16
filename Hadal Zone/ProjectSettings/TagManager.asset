@@ -7,6 +7,7 @@ TagManager:
   - Bullets
   - Enemy
   - Submarine
+  - Sample
   layers:
   - Default
   - TransparentFX
