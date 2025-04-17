@@ -16,12 +16,6 @@ public class SampleSpawningBehaviour : MonoBehaviour
         SampleCreation();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void SampleSelection()
     {
         for(int i = samples.Count ; i> SampleCount; i--)
@@ -35,25 +29,30 @@ public class SampleSpawningBehaviour : MonoBehaviour
 
     private void SampleCreation()
     {
-        foreach(GameObject s in samples)
+        foreach (GameObject s in samples)
         {
             s.AddComponent<Sample>();
-            s.AddComponent<SpriteRenderer>();
+            SpriteRenderer sr = s.AddComponent<SpriteRenderer>();
+            sr.sprite = SampleSprite;
 
-            s.AddComponent<Rigidbody2D>();
-            s.AddComponent<BoxCollider2D>();
-
-            s.AddComponent<SpriteRenderer>();
-            s.GetComponent<SpriteRenderer>().sprite = SampleSprite;
-
-
-            Rigidbody2D body = s.GetComponent<Rigidbody2D>();
-
+            Rigidbody2D body = s.AddComponent<Rigidbody2D>();
             body.gravityScale = 0;
 
-            BoxCollider2D collider = s.GetComponent<BoxCollider2D>();
-
+            CircleCollider2D collider = s.AddComponent<CircleCollider2D>();
             collider.isTrigger = true;
+
+            s.tag = "Sample";
+
+            if (SampleSprite != null)
+            {
+                float pixelsPerUnit = SampleSprite.pixelsPerUnit;
+                float spriteWidth = SampleSprite.rect.width / pixelsPerUnit;
+                float spriteHeight = SampleSprite.rect.height / pixelsPerUnit;
+
+                float minDimension = Mathf.Min(spriteWidth, spriteHeight);
+                collider.radius = minDimension / 2f * 0.9f;
+            }
         }
     }
+
 }
